@@ -19,8 +19,6 @@ def main():
     st.title("Security Package")
     menu=["Steganography","Encryption and Decryption","Background Removal","OTP Authentication","Audio Encryption","Audio Decryption","Image Encryption and Decryption"]
 
-    choice=st.sidebar.selectbox("MENU",menu)
-    menu=["Steganography","Encryption and Decryption","Background Removal","OTP Authentication"]
 
     choice=st.sidebar.selectbox("MENU",menu)
 
@@ -56,37 +54,6 @@ def main():
                 decrypted_text = sp.decode(image_file)
                 st.subheader("Message Retrieved from the File : "+decrypted_text)
     
-    elif choice=='Encryption and Decryption':
-        option = st.selectbox('Select the Cipher',('Caesar','Monoalphabetic','Transpositional','Playfair','Hill','Blowfish','Railfence'))
-        ch = st.selectbox('Choose the Operation',('Encryption','Decryption'))
-        if ch and option:
-            txt_path = st.text_input("Enter the path to the file")
-            st.text(txt_path)
-            if txt_path:
-                f1 = open(txt_path,'r')
-                file_content = f1.read()
-                f1.close()
-
-        
-        li = []
-        if ch=='Encryption' and option =='Caesar' and txt_path:
-            key = st.text_input("Enter the key for encrypting in Caesar Cipher")
-            if key!='':
-                final_content=pk.caesaren(file_content,key)
-                f2=open(txt_path,'w')
-                f2.write(final_content)
-                f2.close()
-                st.subheader("Encryption Successful!! Check your File")
-        
-        if ch=='Decryption' and option =='Caesar' and txt_path:
-            key = st.text_input("Enter the key for decrypting in Caesar Cipher")
-            if key!='':
-                final_content=pk.caesarde(file_content,key)
-                f2=open(txt_path,'w')
-                f2.write(final_content)
-                f2.close()
-                st.subheader("Decryption Successful!! Check your File")
-                st.subheader("Encoded Message from the File : "+decrypted_text)
     
     elif choice=='Encryption and Decryption':
         option = st.selectbox('Select the Cipher',('Caesar','Monoalphabetic','Transpositional'))
