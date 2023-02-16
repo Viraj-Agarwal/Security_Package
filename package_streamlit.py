@@ -10,6 +10,7 @@ import rgb as rgb
 import gray as gr
 import Logistic as lg
 
+
 def load_image(image_file):
 	img = Image.open(image_file)
 	return img
@@ -19,6 +20,10 @@ def main():
     menu=["Steganography","Encryption and Decryption","Background Removal","OTP Authentication","Audio Encryption","Audio Decryption","Image Encryption and Decryption"]
 
     choice=st.sidebar.selectbox("MENU",menu)
+    menu=["Steganography","Encryption and Decryption","Background Removal","OTP Authentication"]
+
+    choice=st.sidebar.selectbox("MENU",menu)
+
     if choice=="Steganography":
         st.subheader("Steganography")
         option = st.selectbox('Which Operation you want to perfrom:',('Encryption','Decryption'))
@@ -39,6 +44,7 @@ def main():
                 image_file=Image.open(img)
                 new_image=sp.encode(image_file,txt)
                 st.image(new_image,width=500,caption="New Image")
+                st.image(new_image,width=500,caption="Encoded Image")
                 new_image.save(op_image_name, str(op_image_name.split(".")[1].upper()))
         elif option=='Decryption':
             img=st.text_input("Enter the path to the Encrypted image file: ")
@@ -80,6 +86,35 @@ def main():
                 f2.write(final_content)
                 f2.close()
                 st.subheader("Decryption Successful!! Check your File")
+                st.subheader("Encoded Message from the File : "+decrypted_text)
+    
+    elif choice=='Encryption and Decryption':
+        option = st.selectbox('Select the Cipher',('Caesar','Monoalphabetic','Transpositional'))
+        txt_path = st.text_input("Enter the path to the text file")
+        st.text(txt_path)
+        # txt_path = Path(txt_path_full)
+        # st.text(txt_path)
+        if txt_path!='.':
+            f1 = open(txt_path,'r')
+            file_content = f1.read()
+            f1.close()
+        ch = st.selectbox('Choose the Operation',('Encryption','Decryption'))
+        li = []
+        if ch=='Encryption' and option =='Caesar' and txt_path:
+            key = st.text_input("Enter the key for encrypting in Caesar Cipher")
+            final_content=pk.caesaren(file_content,key)
+            f2=open(txt_path,'w')
+            f2.write(final_content)
+            f2.close()
+            st.subheader("Encryption Successful!! Check your File")
+        
+        if ch=='Decryption' and option =='Caesar' and txt_path:
+            key = st.text_input("Enter the key for decrypting in Caesar Cipher")
+            final_content=pk.caesarde(file_content,key)
+            f2=open(txt_path,'w')
+            f2.write(final_content)
+            f2.close()
+            st.subheader("Decryption Successful!! Check your File")
         
         if ch=='Encryption' and option =='Monoalphabetic' and txt_path:
             final_content=pk.monoalphen(file_content)
@@ -108,6 +143,15 @@ def main():
                 f3.write(l[0])
                 f3.write(l[1])
                 f3.close()
+            final_content,l=pk.transposen(file_content,l)
+            f2=open(txt_path,'w')
+            f2.write(final_content)
+            f2.close()
+            st.subheader("Encryption Successful!! Check your File")
+            f3=open("keyfile.txt",'w')
+            f3.write(l[0])
+            f3.write(l[1])
+            f3.close()
 
         if ch=='Decryption' and option =='Transpositional' and txt_path:
             # key=st.text_input("Enter the key for Transpositional Decryption")
@@ -298,6 +342,7 @@ def main():
     #     bg.bgrem()
 
 
+        
 
 
 
