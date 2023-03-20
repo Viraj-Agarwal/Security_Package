@@ -11,13 +11,13 @@
 * Background Image Removal for a live video capture
 
 ## Following are the dependencies:
-    * streamlit
-    * mediapipe
-    * opencv
-    * Cryptography
-    * PIL
-    * numpy
-    * matplotlib
+* streamlit
+* mediapipe
+* opencv
+* Cryptography
+* PIL
+* numpy
+* matplotlib
 
 ### To run the streamlit application, clone the repository and create an environment with all the necessary dependencies.
 
